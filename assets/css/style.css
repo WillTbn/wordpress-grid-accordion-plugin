@@ -1,0 +1,77 @@
+.wordpress-grid-accordion {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espaçamento entre os itens */
+}
+
+.grid-accordion-row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 20px; /* Espaçamento entre as linhas e o conteúdo expandido */
+}
+
+.grid-accordion-item {
+    flex: 0 0 calc(33.33% - 13.33px); /* 3 itens por linha com espaçamento */
+    box-sizing: border-box;
+    border-bottom: 1px solid #ccc;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.grid-accordion-item.active {
+    background-color: #f0f0f0;
+    border-radius: 18px;
+}
+
+.grid-accordion-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.grid-accordion-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.grid-accordion-icon {
+    font-family: "Font Awesome 5 Free"; /* Usar Font Awesome */
+    font-weight: 900;
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+}
+
+.grid-accordion-item.active .grid-accordion-icon {
+    transform: rotate(180deg);
+}
+
+/* Ícone padrão chevron-down */
+.grid-accordion-icon.chevron_down::before {
+    content: "\f078"; /* Unicode para fa-chevron-down */
+}
+
+.grid-accordion-content-wrapper {
+    width: 100%;
+    display: none; /* Inicialmente oculto */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .grid-accordion-item {
+        flex: 0 0 calc(50% - 10px); /* 2 itens por linha em telas menores */
+    }
+}
+
+@media (max-width: 480px) {
+    .grid-accordion-item {
+        flex: 0 0 100%; /* 1 item por linha em telas muito pequenas */
+    }
+}
