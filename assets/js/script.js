@@ -1,37 +1,101 @@
 jQuery(document).ready(function($) {
-    $(".wordpress-grid-accordion").on("click", ".grid-accordion-item", function() {
-        var $clickedItem = $(this);
-        var $currentRow = $clickedItem.closest(".grid-accordion-row");
-        var $accordionContainer = $clickedItem.closest(".wordpress-grid-accordion");
-        var itemIndex = $currentRow.find(".grid-accordion-item").index($clickedItem);
-        var rowIndex = $accordionContainer.find(".grid-accordion-row").index($currentRow);
+    // Função para inicializar acordeões
+    function initializeAccordion($container) {
+        $container.on("click", ".grid-accordion-item", function(e) {
+            // Previne cliques no editor do Elementor
+            if ($('body').hasClass('elementor-editor-active')) {
+                e.preventDefault();
+                return;
+            }
 
-        // Calcula o índice global do item clicado
-        var globalItemIndex = (rowIndex * 3) + itemIndex;
+            var $clickedItem = $(this);
+            var $accordionContainer = $clickedItem.closest(".wordpress-grid-accordion");
+            var itemId = $clickedItem.data('item-id');
+            var $contentWrapper = $accordionContainer.find('.grid-accordion-content-wrapper[data-item-id="' + itemId + '"]');
 
-        // Encontra o wrapper de conteúdo para esta linha
-        var $contentWrapper = $currentRow.next(".grid-accordion-content-wrapper");
+            // Se o item clicado já estiver ativo, fecha-o
+            if ($clickedItem.hasClass("active")) {
+                $clickedItem.removeClass("active");
+                $contentWrapper.slideUp(300, function() {
+                    // Remove o wrapper do DOM após a animação
+                    $contentWrapper.remove();
+                });
+            } else {
+                // Fecha todos os outros itens ativos no mesmo acordeão
+                $accordionContainer.find(".grid-accordion-item.active").each(function() {
+                    var $activeItem = $(this);
+                    var activeItemId = $activeItem.data('item-id');
+                    var $activeContentWrapper = $accordionContainer.find('.grid-accordion-content-wrapper[data-item-id="' + activeItemId + '"]');
+                    
+                    $activeItem.removeClass("active");
+                    $activeContentWrapper.slideUp(300, function() {
+                        $activeContentWrapper.remove();
+                    });
+                });
 
-        // Se o item clicado já estiver ativo, fecha-o
-        if ($clickedItem.hasClass("active")) {
-            $clickedItem.removeClass("active");
-            $contentWrapper.slideUp(function() {
-                $contentWrapper.empty(); // Limpa o conteúdo quando fecha
-            });
-        } else {
-            // Remove a classe 'active' de todos os outros itens na mesma linha
-            $currentRow.find(".grid-accordion-item").removeClass("active");
+                // Ativa o item clicado
+                $clickedItem.addClass("active");
 
-            // Adiciona a classe 'active' ao item clicado
-            $clickedItem.addClass("active");
+                // Cria e insere o wrapper de conteúdo após o item clicado
+                var itemIndex = $clickedItem.data('item-index');
+                var accordionId = $accordionContainer.attr('id');
+                var contentData = '';
 
-            // Encontra o conteúdo correspondente nos dados passados pelo PHP
-            var contentData = gridAccordionData[globalItemIndex].content;
+                // Busca o conteúdo nos dados do JavaScript
+                var dataVarName = 'gridAccordionData_' + accordionId;
+                if (typeof window[dataVarName] !== 'undefined' && window[dataVarName][itemIndex]) {
+                    contentData = window[dataVarName][itemIndex].content;
+                } else {
+                    // Fallback
+                    contentData = '<p>Conteúdo do item ' + (itemIndex + 1) + '</p>';
+                }
 
-            // Atualiza e exibe o wrapper de conteúdo
-            $contentWrapper.html(contentData).slideDown();
+                // Cria o wrapper de conteúdo
+                var $newContentWrapper = $('<div class="grid-accordion-content-wrapper" data-item-id="' + itemId + '" style="display: none;">' +
+                    '<div class="grid-accordion-content">' + contentData + '</div>' +
+                    '</div>');
+
+                // Insere o wrapper após o item clicado
+                $clickedItem.after($newContentWrapper);
+
+                // Anima a exibição
+                $newContentWrapper.slideDown(300);
+            }
+        });
+    }
+
+    // Inicializar acordeões existentes
+    $(".wordpress-grid-accordion").each(function() {
+        initializeAccordion($(this));
+    });
+
+    // Compatibilidade com Elementor - reinicializar quando widgets são adicionados
+    if (typeof elementorFrontend !== 'undefined') {
+        elementorFrontend.hooks.addAction('frontend/element_ready/grid_accordion.default', function($scope) {
+            var $accordion = $scope.find('.wordpress-grid-accordion');
+            if ($accordion.length) {
+                // Remove event listeners anteriores para evitar duplicação
+                $accordion.off('click', '.grid-accordion-item');
+                initializeAccordion($accordion);
+            }
+        });
+    }
+
+    // Para widgets adicionados dinamicamente (AJAX, etc.)
+    $(document).on('DOMNodeInserted', function(e) {
+        var $target = $(e.target);
+        if ($target.hasClass('wordpress-grid-accordion') || $target.find('.wordpress-grid-accordion').length) {
+            setTimeout(function() {
+                $target.find('.wordpress-grid-accordion').each(function() {
+                    var $accordion = $(this);
+                    if (!$accordion.data('initialized')) {
+                        $accordion.off('click', '.grid-accordion-item');
+                        initializeAccordion($accordion);
+                        $accordion.data('initialized', true);
+                    }
+                });
+            }, 100);
         }
     });
 });
-
 

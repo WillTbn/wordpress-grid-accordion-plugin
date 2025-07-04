@@ -1,0 +1,120 @@
+/* Tema Moderno - Grid Accordion */
+.wordpress-grid-accordion.theme-modern {
+    gap: 25px;
+}
+
+.wordpress-grid-accordion.theme-modern .grid-accordion-row {
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.wordpress-grid-accordion.theme-modern .grid-accordion-item {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 15px;
+    padding: 25px;
+    color: white;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.wordpress-grid-accordion.theme-modern .grid-accordion-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.wordpress-grid-accordion.theme-modern .grid-accordion-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+}
+
+.wordpress-grid-accordion.theme-modern .grid-accordion-item:hover::before {
+    opacity: 1;
+}
+
+.wordpress-grid-accordion.theme-modern .grid-accordion-item.active {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    box-shadow: 0 12px 30px rgba(255, 107, 107, 0.4);
+}
+
+.wordpress-grid-accordion.theme-modern .grid-accordion-image {
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.wordpress-grid-accordion.theme-modern .grid-accordion-item:hover .grid-accordion-image {
+    transform: scale(1.05);
+}
+
+.wordpress-grid-accordion.theme-modern .grid-accordion-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    letter-spacing: 0.5px;
+}
+
+.wordpress-grid-accordion.theme-modern .grid-accordion-icon {
+    font-size: 1.4em;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.wordpress-grid-accordion.theme-modern .grid-accordion-content-wrapper {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: none;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    color: #333;
+    margin-top: 15px;
+}
+
+.wordpress-grid-accordion.theme-modern .grid-accordion-content-wrapper h4 {
+    color: #667eea;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.wordpress-grid-accordion.theme-modern .grid-accordion-content-wrapper p {
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.wordpress-grid-accordion.theme-modern .grid-accordion-content-wrapper strong {
+    color: #764ba2;
+}
+
+/* Responsividade para tema moderno */
+@media (max-width: 768px) {
+    .wordpress-grid-accordion.theme-modern .grid-accordion-item {
+        padding: 20px;
+    }
+    
+    .wordpress-grid-accordion.theme-modern .grid-accordion-title {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .wordpress-grid-accordion.theme-modern .grid-accordion-item {
+        padding: 18px;
+    }
+    
+    .wordpress-grid-accordion.theme-modern .grid-accordion-content-wrapper {
+        padding: 25px;
+    }
+}
+

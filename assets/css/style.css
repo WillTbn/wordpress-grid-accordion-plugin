@@ -1,20 +1,23 @@
-.wordpress-grid-accordion {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Espaçamento entre os itens */
-}
+/* WordPress Grid Accordion Plugin - v1.5.0 */
+/* Estilos com alta especificidade para evitar sobrescrita */
 
-.grid-accordion-row {
-    display: flex;
-    flex-wrap: wrap;
+.wordpress-grid-accordion.wordpress-grid-accordion {
     width: 100%;
-    margin-bottom: 20px; /* Espaçamento entre as linhas e o conteúdo expandido */
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
-.grid-accordion-item {
-    flex: 0 0 calc(33.33% - 13.33px); /* 3 itens por linha com espaçamento */
+.wordpress-grid-accordion .grid-accordion-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
     box-sizing: border-box;
-    border-bottom: 1px solid #ccc;
+}
+
+.wordpress-grid-accordion .grid-accordion-item {
+    box-sizing: border-box;
+    border: 1px solid #ccc;
     padding: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -22,56 +25,179 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    background-color: #fff;
+    border-radius: 4px;
+    position: relative;
 }
 
-.grid-accordion-item.active {
+.wordpress-grid-accordion .grid-accordion-item:hover {
+    border-color: #999;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.wordpress-grid-accordion .grid-accordion-item.active {
     background-color: #f0f0f0;
-    border-radius: 18px;
+    border-color: #007cba;
 }
 
-.grid-accordion-image {
+.wordpress-grid-accordion .grid-accordion-image {
     max-width: 100%;
     height: auto;
     margin-bottom: 10px;
+    border-radius: 4px;
+    display: block;
 }
 
-.grid-accordion-title {
-    margin-top: 0;
-    margin-bottom: 10px;
+.wordpress-grid-accordion .grid-accordion-title {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.4;
 }
 
-.grid-accordion-icon {
-    font-family: "Font Awesome 5 Free"; /* Usar Font Awesome */
-    font-weight: 900;
+.wordpress-grid-accordion .grid-accordion-icon {
     font-size: 1.2em;
     transition: transform 0.3s ease;
+    color: #666;
+    font-family: "Font Awesome 5 Free", "Font Awesome 5 Pro", "FontAwesome", sans-serif !important;
+    font-weight: 900 !important;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
 }
 
-.grid-accordion-item.active .grid-accordion-icon {
+/* Fallback para ícones que não carregam */
+.wordpress-grid-accordion .grid-accordion-icon:before {
+    content: "\f078"; /* fa-chevron-down como fallback */
+}
+
+/* Ícones específicos do Font Awesome */
+.wordpress-grid-accordion .grid-accordion-icon.fa:before,
+.wordpress-grid-accordion .grid-accordion-icon.fas:before,
+.wordpress-grid-accordion .grid-accordion-icon.far:before,
+.wordpress-grid-accordion .grid-accordion-icon.fal:before,
+.wordpress-grid-accordion .grid-accordion-icon.fab:before {
+    content: inherit;
+}
+
+.wordpress-grid-accordion .grid-accordion-item.active .grid-accordion-icon {
     transform: rotate(180deg);
+    color: #007cba;
 }
 
-/* Ícone padrão chevron-down */
-.grid-accordion-icon.chevron_down::before {
-    content: "\f078"; /* Unicode para fa-chevron-down */
-}
-
-.grid-accordion-content-wrapper {
+.wordpress-grid-accordion .grid-accordion-content-wrapper {
+    grid-column: 1 / -1; /* Ocupa toda a largura da grade */
     width: 100%;
-    display: none; /* Inicialmente oculto */
     padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    margin-top: 10px;
     box-sizing: border-box;
 }
 
-/* Responsividade */
+.wordpress-grid-accordion .grid-accordion-content {
+    line-height: 1.6;
+    color: #555;
+}
+
+.wordpress-grid-accordion .grid-accordion-content p {
+    margin: 0 0 15px 0;
+}
+
+.wordpress-grid-accordion .grid-accordion-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* Estilos específicos para Elementor */
+.elementor-widget-grid_accordion .wordpress-grid-accordion.wordpress-grid-accordion {
+    margin: 0;
+}
+
+.elementor-widget-grid_accordion .wordpress-grid-accordion .grid-accordion-item {
+    border-radius: 4px;
+}
+
+.elementor-widget-grid_accordion .wordpress-grid-accordion .grid-accordion-content-wrapper {
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+/* Compatibilidade com editor do Elementor */
+.elementor-editor-active .wordpress-grid-accordion .grid-accordion-item {
+    pointer-events: none; /* Desabilita cliques no editor */
+}
+
+.elementor-editor-active .wordpress-grid-accordion .grid-accordion-content-wrapper {
+    display: block !important; /* Mostra conteúdo no editor */
+    opacity: 0.7;
+}
+
+/* Responsividade com alta especificidade */
 @media (max-width: 768px) {
-    .grid-accordion-item {
-        flex: 0 0 calc(50% - 10px); /* 2 itens por linha em telas menores */
+    .wordpress-grid-accordion .grid-accordion-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 itens por linha em tablets */
+        gap: 15px;
+    }
+    
+    .wordpress-grid-accordion .grid-accordion-item {
+        padding: 12px;
+    }
+    
+    .wordpress-grid-accordion .grid-accordion-title {
+        font-size: 1em;
+    }
+    
+    .wordpress-grid-accordion .grid-accordion-content-wrapper {
+        padding: 15px;
     }
 }
 
 @media (max-width: 480px) {
-    .grid-accordion-item {
-        flex: 0 0 100%; /* 1 item por linha em telas muito pequenas */
+    .wordpress-grid-accordion .grid-accordion-container {
+        grid-template-columns: 1fr; /* 1 item por linha em mobile */
+        gap: 10px;
+    }
+    
+    .wordpress-grid-accordion .grid-accordion-item {
+        padding: 10px;
+    }
+    
+    .wordpress-grid-accordion .grid-accordion-title {
+        font-size: 0.95em;
+    }
+    
+    .wordpress-grid-accordion .grid-accordion-content-wrapper {
+        padding: 12px;
+        margin-top: 5px;
+    }
+    
+    .wordpress-grid-accordion .grid-accordion-icon {
+        font-size: 1em;
     }
 }
+
+/* Proteção adicional contra sobrescrita de temas */
+.wordpress-grid-accordion.wordpress-grid-accordion * {
+    box-sizing: border-box;
+}
+
+/* Reset de estilos que podem ser sobrescritos */
+.wordpress-grid-accordion .grid-accordion-item h1,
+.wordpress-grid-accordion .grid-accordion-item h2,
+.wordpress-grid-accordion .grid-accordion-item h3,
+.wordpress-grid-accordion .grid-accordion-item h4,
+.wordpress-grid-accordion .grid-accordion-item h5,
+.wordpress-grid-accordion .grid-accordion-item h6 {
+    margin: 0 0 10px 0 !important;
+    padding: 0 !important;
+    line-height: 1.4 !important;
+}
+
+.wordpress-grid-accordion .grid-accordion-content-wrapper * {
+    max-width: 100% !important;
+}
+

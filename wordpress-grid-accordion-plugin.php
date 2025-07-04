@@ -19,16 +19,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Incluir a classe de administração
 require_once plugin_dir_path( __FILE__ ) . 'admin.php';
 
+// Incluir a integração com Elementor
+require_once plugin_dir_path( __FILE__ ) . 'elementor-integration.php';
+
 /**
  * Classe principal do plugin WordPress Grid Accordion.
  */
 class WordPress_Grid_Accordion {
 
     /**
+     * Temas disponíveis
+     */
+    private $available_themes = array(
+        'default' => 'Padrão',
+        'modern' => 'Moderno',
+        'minimal' => 'Minimalista',
+        'corporate' => 'Corporativo',
+        'creative' => 'Criativo'
+    );
+
+    /**
      * Construtor da classe.
      */
     public function __construct() {
-        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 15 ); // Prioridade mais alta
         add_shortcode( 'grid_accordion', array( $this, 'render_grid_accordion' ) );
     }
 
@@ -36,9 +50,35 @@ class WordPress_Grid_Accordion {
      * Enfileira os scripts e estilos do plugin.
      */
     public function enqueue_scripts() {
-        wp_enqueue_style( 'wordpress-grid-accordion-style', plugins_url( 'assets/css/style.css', __FILE__ ), array(), '1.1.0' );
-        wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', array(), '5.15.4' );
-        wp_enqueue_script( 'wordpress-grid-accordion-script', plugins_url( 'assets/js/script.js', __FILE__ ), array( 'jquery' ), '1.1.0', true );
+        wp_enqueue_style( 'wordpress-grid-accordion-style', plugins_url( 'assets/css/style.css', __FILE__ ), array(), '1.5.1' );
+        
+        // Enfileirar Font Awesome apenas se não estiver já carregado
+        if ( ! wp_style_is( 'font-awesome', 'enqueued' ) && ! wp_style_is( 'fontawesome', 'enqueued' ) ) {
+            wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', array(), '5.15.4' );
+        }
+        
+        wp_enqueue_script( 'wordpress-grid-accordion-script', plugins_url( 'assets/js/script.js', __FILE__ ), array( 'jquery' ), '1.5.1', true );
+    }
+
+    /**
+     * Enfileira o CSS do tema específico
+     */
+    public function enqueue_theme_style( $theme ) {
+        if ( $theme && $theme !== 'default' && array_key_exists( $theme, $this->available_themes ) ) {
+            wp_enqueue_style( 
+                'wordpress-grid-accordion-theme-' . $theme, 
+                plugins_url( 'assets/themes/' . $theme . '.css', __FILE__ ), 
+                array( 'wordpress-grid-accordion-style' ), 
+                '1.5.1' 
+            );
+        }
+    }
+
+    /**
+     * Obtém os temas disponíveis
+     */
+    public function get_available_themes() {
+        return $this->available_themes;
     }
 
     /**
@@ -51,21 +91,29 @@ class WordPress_Grid_Accordion {
     public function render_grid_accordion( $atts, $content = null ) {
         $atts = shortcode_atts( array(
             'id' => '',
+            'theme' => 'default', // Novo parâmetro para tema
         ), $atts, 'grid_accordion' );
+
+        // Enfileirar o CSS do tema se necessário
+        $this->enqueue_theme_style( $atts['theme'] );
 
         // Processar o conteúdo para extrair os itens do acordeão.
         // Adicionado suporte para image_url, icon e content_id
         preg_match_all( '/\[grid_accordion_item\s+title="(.*?)"(?:\s+image_url="(.*?)")?(?:\s+icon="(.*?)")?(?:\s+content_id="(.*?)")?\](.*?)\[\/grid_accordion_item\]/s', $content, $matches, PREG_SET_ORDER );
 
-        $output = '<div class="wordpress-grid-accordion" id="' . esc_attr( $atts['id'] ) . '">';
-        $item_count = 0;
-        $current_row_items = [];
+        // Adicionar classe do tema
+        $theme_class = $atts['theme'] !== 'default' ? ' theme-' . esc_attr( $atts['theme'] ) : '';
+        
+        $output = '<div class="wordpress-grid-accordion' . $theme_class . '" id="' . esc_attr( $atts['id'] ) . '">';
+        $output .= '<div class="grid-accordion-items-wrapper">'; // Novo wrapper para os itens
+        
         $all_items_data = [];
+        $item_count = 0;
 
         foreach ( $matches as $item ) {
             $title = $item[1];
             $image_url = isset($item[2]) ? $item[2] : '';
-            $icon = isset($item[3]) ? $item[3] : 'chevron_down'; // Padrão para chevron_down
+            $icon = isset($item[3]) ? $item[3] : 'fas fa-chevron-down'; // Padrão para chevron_down
             $content_id = isset($item[4]) ? $item[4] : '';
             $item_content = isset($item[5]) ? $item[5] : '';
 
@@ -84,55 +132,32 @@ class WordPress_Grid_Accordion {
                 'title' => $title,
                 'image_url' => $image_url,
                 'icon' => $icon,
-                'content' => do_shortcode( $item_content )
+                'content' => do_shortcode( $item_content ) // Processa shortcodes dentro do conteúdo
             ];
 
-            $current_row_items[] = [
-                'id' => $item_id,
-                'title' => $title,
-                'image_url' => $image_url,
-                'icon' => $icon
-            ];
-
-            $item_count++;
-
-            if ( $item_count % 3 === 0 ) {
-                $output .= '<div class="grid-accordion-row">';
-                foreach ( $current_row_items as $row_item ) {
-                    $output .= '<div class="grid-accordion-item" data-item-id="' . esc_attr( $row_item['id'] ) . '">';
-                    if ( ! empty( $row_item['image_url'] ) ) {
-                        $output .= '<img src="' . esc_url( $row_item['image_url'] ) . '" alt="' . esc_attr( $row_item['title'] ) . '" class="grid-accordion-image">';
-                    }
-                    $output .= '<h3 class="grid-accordion-title">' . esc_html( $row_item['title'] ) . '</h3>';
-                    $output .= '<span class="grid-accordion-icon ' . esc_attr( $row_item['icon'] ) . '"></span>'; // Ícone
-                    $output .= '</div>';
-                }
-                $output .= '</div>';
-                $output .= '<div class="grid-accordion-content-wrapper" data-row-id="' . esc_attr( $atts['id'] ) . '-' . (floor(($item_count - 1) / 3)) . '"></div>';
-                $current_row_items = [];
+            // Renderizar cada item individualmente
+            $output .= '<div class="grid-accordion-item" data-item-id="' . esc_attr( $item_id ) . '" data-item-index="' . $item_count . '">';
+            
+            if ( ! empty( $image_url ) ) {
+                $output .= '<img src="' . esc_url( $image_url ) . '" alt="' . esc_attr( $title ) . '" class="grid-accordion-image">';
             }
-        }
-
-        // Adicionar os itens restantes se não formarem uma linha completa
-        if ( ! empty( $current_row_items ) ) {
-            $output .= '<div class="grid-accordion-row">';
-            foreach ( $current_row_items as $row_item ) {
-                $output .= '<div class="grid-accordion-item" data-item-id="' . esc_attr( $row_item['id'] ) . '">';
-                if ( ! empty( $row_item['image_url'] ) ) {
-                    $output .= '<img src="' . esc_url( $row_item['image_url'] ) . '" alt="' . esc_attr( $row_item['title'] ) . '" class="grid-accordion-image">';
-                }
-                $output .= '<h3 class="grid-accordion-title">' . esc_html( $row_item['title'] ) . '</h3>';
-                $output .= '<span class="grid-accordion-icon ' . esc_attr( $row_item['icon'] ) . '"></span>'; // Ícone
-                $output .= '</div>';
-            }
+            
+            $output .= '<h3 class="grid-accordion-title">' . esc_html( $title ) . '</h3>';
+            $output .= '<span class="grid-accordion-icon ' . esc_attr( $icon ) . '"></span>'; // Ícone
             $output .= '</div>';
-            $output .= '<div class="grid-accordion-content-wrapper" data-row-id="' . esc_attr( $atts['id'] ) . '-' . (floor(($item_count - 1) / 3)) . '"></div>';
+            
+            $item_count++;
         }
 
-        $output .= '</div>';
+        $output .= '</div>'; // Fechar grid-accordion-items-wrapper
+        
+        // Adicionar um container para o conteúdo expandido fora do grid dos itens
+        $output .= '<div class="grid-accordion-content-display-wrapper"></div>';
+
+        $output .= '</div>'; // Fechar wordpress-grid-accordion
 
         // Passar os dados dos itens para o JavaScript
-        wp_localize_script( 'wordpress-grid-accordion-script', 'gridAccordionData', $all_items_data );
+        wp_localize_script( 'wordpress-grid-accordion-script', 'gridAccordionData_' . esc_attr( $atts['id'] ), $all_items_data );
 
         return $output;
     }
@@ -140,5 +165,4 @@ class WordPress_Grid_Accordion {
 
 // Inicializa o plugin.
 new WordPress_Grid_Accordion();
-
 

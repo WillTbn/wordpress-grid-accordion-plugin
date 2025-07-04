@@ -1,0 +1,137 @@
+/* Tema Minimalista - Grid Accordion */
+.wordpress-grid-accordion.theme-minimal {
+    gap: 15px;
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-row {
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-item {
+    background: #ffffff;
+    border: 2px solid #f1f3f4;
+    border-radius: 8px;
+    padding: 20px;
+    color: #333;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-item:hover {
+    border-color: #4285f4;
+    box-shadow: 0 2px 8px rgba(66, 133, 244, 0.15);
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-item.active {
+    border-color: #4285f4;
+    background: #f8f9ff;
+    box-shadow: 0 4px 12px rgba(66, 133, 244, 0.2);
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #4285f4;
+    border-radius: 4px 0 0 4px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-item.active::after {
+    opacity: 1;
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-image {
+    border-radius: 6px;
+    margin-bottom: 12px;
+    filter: grayscale(20%);
+    transition: filter 0.3s ease;
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-item:hover .grid-accordion-image {
+    filter: grayscale(0%);
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-title {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #202124;
+    line-height: 1.4;
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-icon {
+    font-size: 1.1em;
+    color: #5f6368;
+    transition: color 0.3s ease;
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-item.active .grid-accordion-icon {
+    color: #4285f4;
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-content-wrapper {
+    background: #ffffff;
+    border: 2px solid #f1f3f4;
+    border-radius: 8px;
+    padding: 24px;
+    color: #333;
+    margin-top: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-content-wrapper h4 {
+    color: #202124;
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-content-wrapper p {
+    line-height: 1.6;
+    margin-bottom: 12px;
+    color: #5f6368;
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-content-wrapper strong {
+    color: #202124;
+    font-weight: 600;
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-content-wrapper ul {
+    margin: 12px 0;
+    padding-left: 20px;
+}
+
+.wordpress-grid-accordion.theme-minimal .grid-accordion-content-wrapper li {
+    margin-bottom: 6px;
+    color: #5f6368;
+}
+
+/* Responsividade para tema minimalista */
+@media (max-width: 768px) {
+    .wordpress-grid-accordion.theme-minimal .grid-accordion-item {
+        padding: 18px;
+    }
+    
+    .wordpress-grid-accordion.theme-minimal .grid-accordion-content-wrapper {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wordpress-grid-accordion.theme-minimal .grid-accordion-item {
+        padding: 16px;
+    }
+    
+    .wordpress-grid-accordion.theme-minimal .grid-accordion-content-wrapper {
+        padding: 18px;
+    }
+}
+
