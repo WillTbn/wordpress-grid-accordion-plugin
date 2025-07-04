@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: WordPress Grid Accordion
- * Plugin URI:  https://example.com/wordpress-grid-accordion
+ * Plugin URI:  https://github.com/WillTbn/wordpress-grid-accordion-plugin
  * Description: Um plugin de acordeão em grade personalizado para WordPress.
- * Version:     1.1.0
+ * Version:     1.5.0
  * Author:      Jorge Nunes
  * Author URI:  https://jorgefsdeveloper.bucardcode.com.br/
  * License:     GPL-2.0+

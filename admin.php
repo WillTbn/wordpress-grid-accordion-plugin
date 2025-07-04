@@ -88,7 +88,7 @@ class WordPress_Grid_Accordion_Admin {
     public function admin_page() {
         ?>
         <div class="wrap">
-            <h1>WordPress Grid Accordion v1.1.0</h1>
+            <h1>Grid Accordion v1.5.0</h1>
             <form method="post" action="options.php">
                 <?php
                 settings_fields( 'wordpress_grid_accordion_settings' );
