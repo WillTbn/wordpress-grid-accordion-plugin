@@ -259,7 +259,6 @@ Relatos e guias de destinos incríveis.
 - **v1.0.0 → v1.4.0**: 100% compatível
 - **v1.1.0 → v1.4.0**: 100% compatível  
 - **v1.2.0 → v1.4.0**: 100% compatível
-- **v1.4.0 → v1.5.0**: 100% compatível
 - **Shortcodes existentes**: Continuam funcionando (tema padrão)
 
 ### Migração de Shortcodes

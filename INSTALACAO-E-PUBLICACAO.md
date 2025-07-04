@@ -270,8 +270,8 @@ Para suporte técnico, consulte a documentação ou:
 
 ---
 
-**Versão:** 1.5.0 - CORREÇÕES CRÍTICAS  
+**Versão:** 1.5.1 - CORREÇÕES CRÍTICAS  
 **Data:** Julho 2025  
-**Autor:** Manus  
+**Autor:** Jorge Nunes  
 **Licença:** GPL-2.0+
 

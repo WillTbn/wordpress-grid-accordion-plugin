@@ -50,14 +50,14 @@ class WordPress_Grid_Accordion {
      * Enfileira os scripts e estilos do plugin.
      */
     public function enqueue_scripts() {
-        wp_enqueue_style( 'wordpress-grid-accordion-style', plugins_url( 'assets/css/style.css', __FILE__ ), array(), '1.5.1' );
+        wp_enqueue_style( 'wordpress-grid-accordion-style', plugins_url( 'assets/css/style.css', __FILE__ ), array(), '1.5.0' );
         
         // Enfileirar Font Awesome apenas se não estiver já carregado
         if ( ! wp_style_is( 'font-awesome', 'enqueued' ) && ! wp_style_is( 'fontawesome', 'enqueued' ) ) {
             wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', array(), '5.15.4' );
         }
         
-        wp_enqueue_script( 'wordpress-grid-accordion-script', plugins_url( 'assets/js/script.js', __FILE__ ), array( 'jquery' ), '1.5.1', true );
+        wp_enqueue_script( 'wordpress-grid-accordion-script', plugins_url( 'assets/js/script.js', __FILE__ ), array( 'jquery' ), '1.5.0', true );
     }
 
     /**
@@ -69,7 +69,7 @@ class WordPress_Grid_Accordion {
                 'wordpress-grid-accordion-theme-' . $theme, 
                 plugins_url( 'assets/themes/' . $theme . '.css', __FILE__ ), 
                 array( 'wordpress-grid-accordion-style' ), 
-                '1.5.1' 
+                '1.5.0' 
             );
         }
     }
@@ -105,7 +105,7 @@ class WordPress_Grid_Accordion {
         $theme_class = $atts['theme'] !== 'default' ? ' theme-' . esc_attr( $atts['theme'] ) : '';
         
         $output = '<div class="wordpress-grid-accordion' . $theme_class . '" id="' . esc_attr( $atts['id'] ) . '">';
-        $output .= '<div class="grid-accordion-items-wrapper">'; // Novo wrapper para os itens
+        $output .= '<div class="grid-accordion-container">';
         
         $all_items_data = [];
         $item_count = 0;
@@ -132,7 +132,7 @@ class WordPress_Grid_Accordion {
                 'title' => $title,
                 'image_url' => $image_url,
                 'icon' => $icon,
-                'content' => do_shortcode( $item_content ) // Processa shortcodes dentro do conteúdo
+                'content' => do_shortcode( $item_content )
             ];
 
             // Renderizar cada item individualmente
@@ -146,14 +146,15 @@ class WordPress_Grid_Accordion {
             $output .= '<span class="grid-accordion-icon ' . esc_attr( $icon ) . '"></span>'; // Ícone
             $output .= '</div>';
             
+            // Adicionar wrapper de conteúdo imediatamente após cada item
+            $output .= '<div class="grid-accordion-content-wrapper" data-item-id="' . esc_attr( $item_id ) . '" style="display: none;">';
+            $output .= '<div class="grid-accordion-content">' . do_shortcode( $item_content ) . '</div>';
+            $output .= '</div>';
+
             $item_count++;
         }
 
-        $output .= '</div>'; // Fechar grid-accordion-items-wrapper
-        
-        // Adicionar um container para o conteúdo expandido fora do grid dos itens
-        $output .= '<div class="grid-accordion-content-display-wrapper"></div>';
-
+        $output .= '</div>'; // Fechar grid-accordion-container
         $output .= '</div>'; // Fechar wordpress-grid-accordion
 
         // Passar os dados dos itens para o JavaScript
