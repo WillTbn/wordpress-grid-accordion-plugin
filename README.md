@@ -1,8 +1,8 @@
-# WordPress Grid Accordion Plugin v1.1.0 - Documentação Atualizada
+# Grid Accordion Personalite Plugin v1.5.3 - Documentação Atualizada
 
 ## Visão Geral
 
-O WordPress Grid Accordion é um plugin personalizado que cria um sistema de acordeão em grade, onde os itens são organizados em linhas de 3 elementos (33.33% cada) e o conteúdo expandido aparece abaixo de cada linha completa.
+O Grid Accordion Personalite é um plugin personalizado que cria um sistema de acordeão em grade, onde os itens são organizados em linhas de 3 elementos (33.33% cada) e o conteúdo expandido aparece abaixo de cada linha completa.
 
 ## Novidades da Versão 1.1.0
 
@@ -188,7 +188,7 @@ Conteúdo será carregado do post ID 458
 - **jQuery**: Incluído no WordPress
 - **Navegadores**: Chrome, Firefox, Safari, Edge (versões modernas)
 
-## Migração da v1.0.0 para v1.1.0
+## Migração da v1.0.0 para v1.5.3
 
 A versão 1.1.0 é totalmente compatível com a versão anterior. Todos os shortcodes existentes continuarão funcionando normalmente. As novas funcionalidades são opcionais e podem ser adicionadas gradualmente.
 

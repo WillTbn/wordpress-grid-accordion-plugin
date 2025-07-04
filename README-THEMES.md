@@ -1,8 +1,8 @@
-# WordPress Grid Accordion Plugin v1.4.0 - Documentação dos Temas Pré-definidos
+# Grid Accordion Personalite Plugin v1.4.0 - Documentação dos Temas Pré-definidos
 
 ## Visão Geral
 
-A versão 1.4.0 do WordPress Grid Accordion introduz um sistema completo de temas pré-definidos, permitindo que os usuários escolham entre 5 estilos visuais distintos para personalizar a aparência de seus acordeões sem necessidade de conhecimento em CSS.
+A versão 1.4.0 do Grid Accordion Personalite introduz um sistema completo de temas pré-definidos, permitindo que os usuários escolham entre 5 estilos visuais distintos para personalizar a aparência de seus acordeões sem necessidade de conhecimento em CSS.
 
 ## Novidades da Versão 1.4.0
 
@@ -257,7 +257,7 @@ Relatos e guias de destinos incríveis.
 
 ### Compatibilidade com Versões Anteriores
 - **v1.0.0 → v1.4.0**: 100% compatível
-- **v1.1.0 → v1.4.0**: 100% compatível  
+- **v1.5.3 → v1.4.0**: 100% compatível  
 - **v1.2.0 → v1.4.0**: 100% compatível
 - **Shortcodes existentes**: Continuam funcionando (tema padrão)
 
@@ -369,7 +369,7 @@ Relatos e guias de destinos incríveis.
 
 ## Conclusão
 
-O sistema de temas da versão 1.4.0 representa um avanço significativo na flexibilidade e usabilidade do WordPress Grid Accordion. Com 5 temas profissionais pré-definidos, os usuários podem criar acordeões visualmente impressionantes sem conhecimento técnico, enquanto desenvolvedores têm total liberdade para criar temas personalizados.
+O sistema de temas da versão 1.4.0 representa um avanço significativo na flexibilidade e usabilidade do Grid Accordion Personalite. Com 5 temas profissionais pré-definidos, os usuários podem criar acordeões visualmente impressionantes sem conhecimento técnico, enquanto desenvolvedores têm total liberdade para criar temas personalizados.
 
 A implementação foi cuidadosamente planejada para manter compatibilidade total com versões anteriores, garantir performance otimizada e oferecer máxima flexibilidade para futuras expansões.
 
@@ -380,5 +380,77 @@ A implementação foi cuidadosamente planejada para manter compatibilidade total
 - **Compatibilidade**: Funciona com shortcodes e Elementor
 - **Extensibilidade**: Base sólida para temas personalizados
 
-O WordPress Grid Accordion v1.4.0 estabelece um novo padrão para plugins de acordeão, combinando funcionalidade robusta com design profissional e facilidade de uso.
+O Grid Accordion Personalite v1.4.0 estabelece um novo padrão para plugins de acordeão, combinando funcionalidade robusta com design profissional e facilidade de uso.
+
+
+[grid_accordion theme="modern" id="servicos_tech"]
+    [grid_accordion_item title="Vuc Aberto" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/04/VUC.png" icon="fas fa-code" content_id="2808" ]
+    Criamos sites modernos usando as mais recentes tecnologias.
+    [/grid_accordion_item]
+     [grid_accordion_item title="Vuc Aberto" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/05/VUC-BAU.png" icon="fas fa-code" content_id="4902" ]
+    Criamos sites modernos usando as mais recentes tecnologias.
+    [/grid_accordion_item]
+[/grid_accordion]
+
+
+
+
+[grid_accordion theme="modern" id="servicos_tech"]
+    [grid_accordion_item title="Vuc Aberto" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/04/VUC.png" icon="fas fa-code" content_id="2808"]
+   teste
+    [/grid_accordion_item]
+
+    [grid_accordion_item title="Vuc Fechado" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/05/VUC-BAU.png" icon="fas fa-mobile-alt" content_id="2812"]
+   teste
+    [/grid_accordion_item]
+
+    [grid_accordion_item title="Toco Aberto" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/05/toco-carroceria-copiar.png" icon="fas fa-mobile-alt" content_id="2888"]
+   teste
+    [/grid_accordion_item]
+
+    [grid_accordion_item title="Toco Fechado" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/05/toco.png" icon="fas fa-mobile-alt" content_id="2893"]
+   teste
+    [/grid_accordion_item]
+
+    [grid_accordion_item title="Truck Aberta" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/04/truck-carroceria-copiar.png" icon="fas fa-mobile-alt" content_id="2876"]
+   teste
+    [/grid_accordion_item]
+
+    [grid_accordion_item title="Truck fechado" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/04/truck.png" icon="fas fa-mobile-alt" content_id="2873"]
+   teste
+    [/grid_accordion_item]
+
+    [grid_accordion_item title="Carreta Aberta" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/04/Carreta_carroceria-aberta.png" icon="fas fa-mobile-alt" content_id="2881"]
+   teste
+    [/grid_accordion_item]
+
+    [grid_accordion_item title="Carreta Fechada" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/05/carreta-com-bau.png" icon="fas fa-mobile-alt" content_id="2884"]
+   teste
+    [/grid_accordion_item]
+
+    [grid_accordion_item title="Caminhão Basculante" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/04/basculante.png" icon="fas fa-mobile-alt" content_id="3006"]
+   teste
+    [/grid_accordion_item]
+
+    [grid_accordion_item title="Caminhão Munck" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/04/munck.png" icon="fas fa-mobile-alt" content_id="2902"]
+   teste
+    [/grid_accordion_item]
+
+    [grid_accordion_item title="Utilitário Aberto" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/05/utilitario.png" icon="fas fa-mobile-alt" content_id="2896"]
+   teste
+    [/grid_accordion_item]
+
+    [grid_accordion_item title="Utilitário fechado" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/05/CARRO-UTILITARIO-carroceria-fechada-copiar.png" icon="fas fa-mobile-alt" content_id="2899"]
+   teste
+    [/grid_accordion_item]
+
+    [grid_accordion_item title="Carro Passeio" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/05/Carro-de-Passeio.png" icon="fas fa-mobile-alt" content_id="2906"]
+   teste
+    [/grid_accordion_item]
+
+    [grid_accordion_item title="Moto" image_url="https://teste.landapp.com.br/wp-content/uploads/2025/05/MOTO.png" icon="fas fa-mobile-alt" content_id="2909"]
+   teste
+    [/grid_accordion_item]
+
+[/grid_accordion]
 

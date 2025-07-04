@@ -1,4 +1,4 @@
-/* WordPress Grid Accordion Plugin - v1.5.0 */
+/* Grid Accordion Personalite Plugin - v1.5.0 */
 /* Estilos com alta especificidade para evitar sobrescrita */
 
 .wordpress-grid-accordion.wordpress-grid-accordion {
@@ -37,7 +37,7 @@
 
 .wordpress-grid-accordion .grid-accordion-item.active {
     background-color: #f0f0f0;
-    border-color: #007cba;
+    border-color: #F15500;
 }
 
 .wordpress-grid-accordion .grid-accordion-image {
@@ -85,7 +85,7 @@
 
 .wordpress-grid-accordion .grid-accordion-item.active .grid-accordion-icon {
     transform: rotate(180deg);
-    color: #007cba;
+    color: #F15500;
 }
 
 .wordpress-grid-accordion .grid-accordion-content-wrapper {

@@ -1,8 +1,8 @@
-# WordPress Grid Accordion Plugin v1.2.0 - Documentação da Integração Elementor
+# Grid Accordion Personalite Plugin v1.2.0 - Documentação da Integração Elementor
 
 ## Visão Geral
 
-A versão 1.2.0 do WordPress Grid Accordion introduz integração completa com o Elementor, permitindo que os usuários criem acordeões em grade diretamente no editor visual do Elementor com controles intuitivos e em tempo real.
+A versão 1.2.0 do Grid Accordion Personalite introduz integração completa com o Elementor, permitindo que os usuários criem acordeões em grade diretamente no editor visual do Elementor com controles intuitivos e em tempo real.
 
 ## Novidades da Versão 1.2.0
 
@@ -158,7 +158,7 @@ Widget: Grid Accordion
 ## Migração e Compatibilidade
 
 ### Compatibilidade com Versões Anteriores
-- Shortcodes da v1.1.0 continuam funcionando
+- Shortcodes da v1.5.3 continuam funcionando
 - Configurações existentes são preservadas
 - Não há breaking changes
 
@@ -326,7 +326,7 @@ jQuery(document).ready(function($) {
 
 ## Conclusão
 
-A versão 1.2.0 representa um marco importante no desenvolvimento do WordPress Grid Accordion, oferecendo integração nativa com o Elementor e mantendo total compatibilidade com versões anteriores. O widget proporciona uma experiência de usuário superior, com controles visuais intuitivos e flexibilidade total para criação de acordeões profissionais.
+A versão 1.2.0 representa um marco importante no desenvolvimento do Grid Accordion Personalite, oferecendo integração nativa com o Elementor e mantendo total compatibilidade com versões anteriores. O widget proporciona uma experiência de usuário superior, com controles visuais intuitivos e flexibilidade total para criação de acordeões profissionais.
 
 A integração foi desenvolvida seguindo as melhores práticas do Elementor, garantindo performance, compatibilidade e facilidade de uso para desenvolvedores e usuários finais.
 

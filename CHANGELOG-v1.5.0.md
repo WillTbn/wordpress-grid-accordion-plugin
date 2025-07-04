@@ -1,4 +1,4 @@
-# WordPress Grid Accordion Plugin - Changelog v1.5.0
+# Grid Accordion Personalite Plugin - Changelog v1.5.0
 
 ## 🔧 Correções Críticas Implementadas
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WordPress Grid Accordion
+ * Plugin Name: Grid Accordion Personalite
  * Plugin URI:  https://github.com/WillTbn/wordpress-grid-accordion-plugin
  * Description: Um plugin de acordeão em grade personalizado para WordPress.
  * Version:     1.5.0
@@ -23,7 +23,7 @@ require_once plugin_dir_path( __FILE__ ) . 'admin.php';
 require_once plugin_dir_path( __FILE__ ) . 'elementor-integration.php';
 
 /**
- * Classe principal do plugin WordPress Grid Accordion.
+ * Classe principal do plugin Grid Accordion Personalite.
  */
 class WordPress_Grid_Accordion {
 
@@ -120,10 +120,24 @@ class WordPress_Grid_Accordion {
             $item_id = 'grid-accordion-item-' . uniqid(); // Gerar um ID único para cada item
 
             // Se content_id for fornecido, buscar o conteúdo do post/página
+            // if ( ! empty( $content_id ) ) {
+            //     $post_content = get_post_field( 'post_content', $content_id );
+            //     if ( $post_content ) {
+            //         $item_content = $post_content; // Usa o conteúdo do post/página
+            //     } else {
+            //         // Fallback: usa o conteúdo entre as tags caso o post não exista ou esteja vazio
+            //         $item_content = $item_content;
+            //     }
+            // }
             if ( ! empty( $content_id ) ) {
-                $post_content = get_post_field( 'post_content', $content_id );
-                if ( $post_content ) {
-                    $item_content = $post_content; // Sobrescreve o conteúdo do shortcode se content_id for válido
+                // Se Elementor estiver ativo e o post for um template do Elementor
+                if ( function_exists( 'elementor_theme_do_location' ) && class_exists( '\\Elementor\\Plugin' ) ) {
+                    $item_content = \Elementor\Plugin::instance()->frontend->get_builder_content_for_display( $content_id );
+                } else {
+                    $post_content = get_post_field( 'post_content', $content_id );
+                    if ( $post_content ) {
+                        $item_content = apply_filters( 'the_content', $post_content );
+                    }
                 }
             }
 

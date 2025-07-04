@@ -17,7 +17,7 @@ class WordPress_Grid_Accordion_Admin {
      */
     public function add_admin_menu() {
         add_options_page(
-            'WordPress Grid Accordion',
+            'Grid Accordion Personalite',
             'Grid Accordion',
             'manage_options',
             'wordpress-grid-accordion',
@@ -88,7 +88,7 @@ class WordPress_Grid_Accordion_Admin {
     public function admin_page() {
         ?>
         <div class="wrap">
-            <h1>WordPress Grid Accordion v1.1.0</h1>
+            <h1>Grid Accordion Personalite v1.5.3</h1>
             <form method="post" action="options.php">
                 <?php
                 settings_fields( 'wordpress_grid_accordion_settings' );
